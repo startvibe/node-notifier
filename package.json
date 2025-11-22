@@ -14,7 +14,6 @@
     "example:windows:custom-path": "cross-env DEBUG=notifier node ./example/toaster-custom-path.js",
     "copy-resources": "copyfiles -u 2 ./vendor/snoreToast/snoretoast-x64.exe ./dist/example/resources/ && copyfiles -u 1 ./example/coulson.jpg ./dist/example/resources/",
     "preexample:windows:nexe-custom-path": "rimraf dist",
-    "example:windows:nexe-custom-path": "nexe -t windows-x64-14.15.3 -i ./example/toaster-custom-path.js -o ./dist/toaster-custom-path.exe && npm run copy-resources",
     "postexample:windows:nexe-custom-path": "cross-env DEBUG=notifier ./dist/toaster-custom-path.exe",
     "lint": "eslint example/*.js lib/*.js notifiers/*.js test/**/*.js index.js",
     "prepare": "husky install"
@@ -46,17 +45,16 @@
   "devDependencies": {
     "copyfiles": "^2.4.1",
     "cross-env": "^7.0.3",
-    "eslint": "^7.26.0",
-    "eslint-config-semistandard": "^15.0.1",
-    "eslint-config-standard": "^16.0.2",
-    "eslint-plugin-import": "^2.22.1",
+    "eslint": "^8.57.1",
+    "eslint-config-semistandard": "^17.0.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-promise": "^6.6.0",
     "husky": "^8.0.1",
-    "jest": "^26.6.3",
+    "jest": "^29.7.0",
     "lint-staged": "^13.0.3",
-    "nexe": "^4.0.0-beta.19",
-    "prettier": "^2.3.0",
+    "prettier": "^3.6.2",
     "rimraf": "^3.0.2"
   },
   "dependencies": {

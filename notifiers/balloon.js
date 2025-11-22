@@ -64,7 +64,7 @@ function notifyRaw(options, callback) {
     this,
     options,
     callback,
-    function(data) {
+    function (data) {
       if (data === 'activate') {
         return 'click';
       }
@@ -93,7 +93,7 @@ function notifyRaw(options, callback) {
     return this;
   }
 
-  checkGrowl(notifierOptions, function(_, hasGrowlResult) {
+  checkGrowl(notifierOptions, function (_, hasGrowlResult) {
     hasGrowl = hasGrowlResult;
 
     if (hasGrowl) {
@@ -108,7 +108,7 @@ function notifyRaw(options, callback) {
 }
 
 Object.defineProperty(WindowsBalloon.prototype, 'notify', {
-  get: function() {
+  get: function () {
     if (!this._notify) this._notify = notifyRaw.bind(this);
     return this._notify;
   }
@@ -134,11 +134,11 @@ function doNotification(options, notifierOptions, callback) {
     wrapper: '',
     noEscape: true,
     explicitTrue: true,
-    allowedArguments: allowedArguments
+    allowedArguments
   });
 
   if (options.wait) {
-    return utils.fileCommand(localNotifier, argsList, function(error, data) {
+    return utils.fileCommand(localNotifier, argsList, function (error, data) {
       const action = fromErrorCodeToAction(error.code);
       if (action === 'error') return callback(error, data);
 
