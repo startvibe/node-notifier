@@ -5,23 +5,23 @@ Send cross platform native notifications using Node.js. Notification Center for 
 earlier Windows versions. Growl is used if none of these requirements are met.
 [Works well with Electron](#within-electron-packaging).
 
-![macOS Screenshot](https://raw.githubusercontent.com/mikaelbr/node-notifier/master/example/mac.png)
-![Native Windows Screenshot](https://raw.githubusercontent.com/mikaelbr/node-notifier/master/example/windows.png)
+![macOS Screenshot](https://raw.githubusercontent.com/startvibe/node-notifier/master/example/mac.png)
+![Native Windows Screenshot](https://raw.githubusercontent.com/startvibe/node-notifier/master/example/windows.png)
 
 ## Input Example macOS Notification Center
 
-![Input Example](https://raw.githubusercontent.com/mikaelbr/node-notifier/master/example/input-example.gif)
+![Input Example](https://raw.githubusercontent.com/startvibe/node-notifier/master/example/input-example.gif)
 
 ## Actions Example Windows SnoreToast
 
-![Actions Example](https://raw.githubusercontent.com/mikaelbr/node-notifier/master/example/windows-actions-example.gif)
+![Actions Example](https://raw.githubusercontent.com/startvibe/node-notifier/master/example/windows-actions-example.gif)
 
 ## Quick Usage
 
 Show a native notification on macOS, Windows, Linux:
 
 ```javascript
-const notifier = require('node-notifier');
+const notifier = require('@startvibe/node-notifier');
 // String
 notifier.notify('Message');
 
@@ -44,13 +44,13 @@ See [documentation and flow chart for reporter choice](./DECISION_FLOW.md).
 ## Install
 
 ```shell
-npm install --save node-notifier
+npm install --save @startvibe/node-notifier
 ```
 
 ## <abbr title="Command Line Interface">CLI</abbr>
 
 <abbr title="Command Line Interface">CLI</abbr> has moved to separate project:
-<https://github.com/mikaelbr/node-notifier-cli>
+<https://github.com/startvibe/node-notifier-cli>
 
 ## Cross-Platform Advanced Usage
 
@@ -59,7 +59,7 @@ Standard usage, with cross-platform fallbacks as defined in the
 below will work in some way or another on most platforms.
 
 ```javascript
-const notifier = require('node-notifier');
+const notifier = require('@startvibe/node-notifier');
 const path = require('path');
 
 notifier.notify(
@@ -93,19 +93,19 @@ See below for documentation on each reporter.
 **Example:**
 
 ```javascript
-const NotificationCenter = require('node-notifier/notifiers/notificationcenter');
+const NotificationCenter = require('@startvibe/node-notifier/notifiers/notificationcenter');
 new NotificationCenter(options).notify();
 
-const NotifySend = require('node-notifier/notifiers/notifysend');
+const NotifySend = require('@startvibe/node-notifier/notifiers/notifysend');
 new NotifySend(options).notify();
 
-const WindowsToaster = require('node-notifier/notifiers/toaster');
+const WindowsToaster = require('@startvibe/node-notifier/notifiers/toaster');
 new WindowsToaster(options).notify();
 
-const Growl = require('node-notifier/notifiers/growl');
+const Growl = require('@startvibe/node-notifier/notifiers/growl');
 new Growl(options).notify();
 
-const WindowsBalloon = require('node-notifier/notifiers/balloon');
+const WindowsBalloon = require('@startvibe/node-notifier/notifiers/balloon');
 new WindowsBalloon(options).notify();
 ```
 
@@ -113,13 +113,13 @@ Or, if you are using several reporters (or you're lazy):
 
 ```javascript
 // NOTE: Technically, this takes longer to require
-const nn = require('node-notifier');
+const nn = require('@startvibe/node-notifier');
 
-new nn.NotificationCenter(options).notify();
-new nn.NotifySend(options).notify();
-new nn.WindowsToaster(options).notify(options);
-new nn.WindowsBalloon(options).notify(options);
-new nn.Growl(options).notify(options);
+new @startvibe/node-notifier.NotificationCenter(options).notify();
+new @startvibe/node-notifier.NotifySend(options).notify();
+new @startvibe/node-notifier.WindowsToaster(options).notify(options);
+new @startvibe/node-notifier.WindowsBalloon(options).notify(options);
+new @startvibe/node-notifier.Growl(options).notify(options);
 ```
 
 ## Contents
@@ -155,7 +155,8 @@ but they aren't documented.
 ### All notification options with their defaults:
 
 ```javascript
-const NotificationCenter = require('node-notifier').NotificationCenter;
+const NotificationCenter =
+  require('@startvibe/node-notifier').NotificationCenter;
 
 var notifier = new NotificationCenter({
   withFallback: false, // Use Growl Fallback if <= 10.8
@@ -261,7 +262,7 @@ specified at installation of your app. For example: If you use the squirrel
 framework, your `appID` will be something like `com.squirrel.your.app`.
 
 ```javascript
-const WindowsToaster = require('node-notifier').WindowsToaster;
+const WindowsToaster = require('@startvibe/node-notifier').WindowsToaster;
 
 var notifier = new WindowsToaster({
   withFallback: false, // Fallback to Growl or Balloons?
@@ -288,7 +289,7 @@ notifier.notify(
 ### Usage: `Growl`
 
 ```javascript
-const Growl = require('node-notifier').Growl;
+const Growl = require('@startvibe/node-notifier').Growl;
 
 var notifier = new Growl({
   name: 'Growl Name Used', // Defaults as 'Node'
@@ -318,7 +319,7 @@ fallback is activated and Growl is running). The balloons notifier uses a great
 project called [**`notifu`**](http://www.paralint.com/projects/notifu/).
 
 ```javascript
-const WindowsBalloon = require('node-notifier').WindowsBalloon;
+const WindowsBalloon = require('@startvibe/node-notifier').WindowsBalloon;
 
 var notifier = new WindowsBalloon({
   withFallback: false, // Try Windows Toast and Growl first?
@@ -347,7 +348,7 @@ See full usage on the [project homepage: **`notifu`**](http://www.paralint.com/p
 **Note:** `notify-send` doesn't support the `wait` flag.
 
 ```javascript
-const NotifySend = require('node-notifier').NotifySend;
+const NotifySend = require('@startvibe/node-notifier').NotifySend;
 
 var notifier = new NotifySend();
 
@@ -360,7 +361,7 @@ notifier.notify({
   timeout: 10, // Alias for expire-time, time etc. Time before notify-send expires. Defaults to 10 seconds.
 
   // .. and other notify-send flags:
-  'app-name': 'node-notifier',
+  'app-name': '@startvibe/node-notifier',
   urgency: undefined,
   category: undefined,
   hint: undefined
@@ -385,7 +386,7 @@ A very special thanks to all the modules `node-notifier` uses.
 
 ### How to use SnoreToast with both appID and actions
 
-[See this issue by Araxeus](https://github.com/mikaelbr/node-notifier/issues/424).
+[See this issue by Araxeus](https://github.com/startvibe/node-notifier/issues/424).
 
 ### Windows: `SnoreToast` text
 
@@ -395,15 +396,15 @@ _**Short answer:** update your `appID`._
 ### Windows and WSL2
 
 If you don't see notifications within WSL2, you might have to change permission of exe vendor files (snoreToast).
-[See issue for more info](https://github.com/mikaelbr/node-notifier/issues/353)
+[See issue for more info](https://github.com/startvibe/node-notifier/issues/353)
 
 ### Use inside tmux session
 
 When using `node-notifier` within a tmux session, it can cause a hang in the system.
 This can be solved by following the steps described in [this comment](https://github.com/julienXX/terminal-notifier/issues/115#issuecomment-104214742)
 
-There’s even more info [here](https://github.com/mikaelbr/node-notifier/issues/61#issuecomment-163560801)
-<https://github.com/mikaelbr/node-notifier/issues/61#issuecomment-163560801>.
+There’s even more info [here](https://github.com/startvibe/node-notifier/issues/61#issuecomment-163560801)
+<https://github.com/startvibe/node-notifier/issues/61#issuecomment-163560801>.
 
 ### macOS: Custom icon without Terminal icon
 
@@ -418,8 +419,8 @@ is the initiator, and it has the Terminal icon defined as its icon.
 To define your custom icon, you need to fork `terminal-notifier` and build your
 custom version with your icon.
 
-See [Issue #71 for more info](https://github.com/mikaelbr/node-notifier/issues/71)
-<https://github.com/mikaelbr/node-notifier/issues/71>.
+See [Issue #71 for more info](https://github.com/startvibe/node-notifier/issues/71)
+<https://github.com/startvibe/node-notifier/issues/71>.
 
 ### Within Electron Packaging
 
@@ -433,7 +434,7 @@ the notification binaries.
 You can do so with the following command:
 
 ```bash
-asar pack . app.asar --unpack "./node_modules/node-notifier/vendor/**"
+asar pack . app.asar --unpack "./node_modules/@startvibe/node-notifier/vendor/**"
 ```
 
 Or if you use `electron-builder` without using asar directly, append `build` object to your `package.json` as below:
@@ -442,7 +443,7 @@ Or if you use `electron-builder` without using asar directly, append `build` obj
 ...
 build: {
   asarUnpack: [
-    './node_modules/node-notifier/**/*',
+    './node_modules/@startvibe/node-notifier/**/*',
   ]
 },
 ...
@@ -450,7 +451,7 @@ build: {
 
 ### Using with pkg
 
-For issues using with the pkg module. Check this issue out: https://github.com/mikaelbr/node-notifier/issues/220#issuecomment-425963752
+For issues using with the pkg module. Check this issue out: https://github.com/startvibe/node-notifier/issues/220#issuecomment-425963752
 
 ### Using Webpack
 
@@ -474,12 +475,12 @@ node: {
 
 This package is licensed using the [MIT License](http://en.wikipedia.org/wiki/MIT_License).
 
-[SnoreToast](https://raw.githubusercontent.com/mikaelbr/node-notifier/master/vendor/snoreToast/LICENSE) and [Notifu](https://raw.githubusercontent.com/mikaelbr/node-notifier/master/vendor/notifu/LICENSE) have licenses in their vendored versions which do not match the MIT license, LGPL-3 and BSD 3-Clause to be specific. We are not lawyers, but have made our best efforts to conform to the terms in those licenses while releasing this package using the license we chose.
+[SnoreToast](https://raw.githubusercontent.com/startvibe/node-notifier/master/vendor/snoreToast/LICENSE) and [Notifu](https://raw.githubusercontent.com/startvibe/node-notifier/master/vendor/notifu/LICENSE) have licenses in their vendored versions which do not match the MIT license, LGPL-3 and BSD 3-Clause to be specific. We are not lawyers, but have made our best efforts to conform to the terms in those licenses while releasing this package using the license we chose.
 
-[npm-url]: https://npmjs.org/package/node-notifier
-[npm-image]: http://img.shields.io/npm/v/node-notifier.svg?style=flat
-[size-url]: https://packagephobia.com/result?p=node-notifier
-[size-image]: https://packagephobia.com/badge?p=node-notifier
-[npm-downloads]: http://img.shields.io/npm/dm/node-notifier.svg?style=flat
-[travis-url]: http://travis-ci.org/mikaelbr/node-notifier
-[travis-image]: http://img.shields.io/travis/mikaelbr/node-notifier.svg?style=flat
+[npm-url]: https://npmjs.org/package/@startvibe/node-notifier
+[npm-image]: http://img.shields.io/npm/v/@startvibe/node-notifier.svg?style=flat
+[size-url]: https://packagephobia.com/result?p=@startvibe/node-notifier
+[size-image]: https://packagephobia.com/badge?p=@startvibe/node-notifier
+[npm-downloads]: http://img.shields.io/npm/dm/@startvibe/node-notifier.svg?style=flat
+[travis-url]: http://travis-ci.org/startvibe/node-notifier
+[travis-image]: http://img.shields.io/travis/startvibe/node-notifier.svg?style=flat
